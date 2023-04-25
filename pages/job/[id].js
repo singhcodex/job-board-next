@@ -1,8 +1,10 @@
-import { getJob } from "@/lib/data"
+import { alreadyApplied, getJob } from "@/lib/data"
 import prisma from "@/lib/prisma"
+import { getServerSession } from "next-auth"
 import Link from "next/link"
+import { authOptions } from "../api/auth/[...nextauth]"
 
-export default function Job({job}){
+export default function Job({job, applied}){
     return (
        <>
        <div className="container m-auto">
@@ -22,14 +24,25 @@ export default function Job({job}){
                 </Link>
             </div>
         </div>
-
-        <div className="text-center mt-5">
-            <Link href={`/job/${job.id}/apply`}>
+        {applied ? (
+            <div className="text-center mt-5">
+            <Link href={`/dashboard`}>
                 <button className="border px-8 py-2 mt-0 font-bold rounded-full hover:bg-black hover:text-white">
-                    Apply for this Job
+                    You already applied!
                 </button>
             </Link>
         </div>
+        ) : (
+            <div className="text-center mt-5">
+                <Link href={`/job/${job.id}/apply`}>
+                    <button className="border px-8 py-2 mt-0 font-bold rounded-full hover:bg-black hover:text-white">
+                        Apply to this Job
+                    </button>
+                </Link>
+            </div>
+            
+        )}
+        
        </div>
        </>
     )
@@ -37,10 +50,14 @@ export default function Job({job}){
 
 
 export async function getServerSideProps(context){
+    const session = await getServerSession(context.req, context.res, authOptions)
+
     let job = await getJob(context.params.id, prisma)
     job = JSON.parse(JSON.stringify(job))
     
-    console.log(context.params.id)
+    const applied = await alreadyApplied(session.user.id, context.params.id, prisma)
 
-    return {props: {job}}
+    //console.log(context.params.id)
+
+    return {props: {job, applied}}
 }

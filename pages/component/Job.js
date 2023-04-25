@@ -6,7 +6,7 @@ const Job = ({job, isDashboard}) => {
             <h2 className="underline text-xl font-bold">
                 <Link href={`/job/${job.id}`} className="hover:text-sky-600">{job.title}</Link>
             </h2>
-            <p className="text-base font-normal mt-3">{job.description}</p>
+            <p className="text-base font-normal mt-3 mb-5">{job.description}</p>
             {isDashboard && job.published && (
                 <span className="bg-black text-white uppercase text-sm p-2 mr-5"> ✅ Published</span>
             )}

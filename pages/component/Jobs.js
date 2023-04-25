@@ -7,7 +7,7 @@ const Jobs = ({jobs, isDashboard}) => {
     return (
         <>
         {jobs.map((job, index) => (
-            <Job key={index} job={job} isDashboard={isDashboard}/>
+            <Job key={index} job={job}/>
         ))}
         </>
     )

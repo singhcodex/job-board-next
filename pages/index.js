@@ -47,11 +47,14 @@ export default function Index({jobs, user}) {
           </>
         ) : (
           <>
+          <Link href={`/dashboard`}>
           <button
           className='ml-5 border px-8 py-2 mt-5 font-bold rounded-full bg-black text-white border-black '
         >
           see all the jobs you applied to
         </button>
+          </Link>
+          
           </>
         )}
 
