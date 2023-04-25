@@ -12,7 +12,7 @@ export default function Job({job}){
        
 
         <div className="card border px-3 py-4">
-            <h2 className="text-center mb-5">{job.title}</h2>
+            <h2 className="text-center mb-5 text-xl font-bold">{job.title}</h2>
             <p>{job.description}</p>
 
             <div className="mt-4">
