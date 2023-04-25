@@ -69,10 +69,10 @@ export default function Dashboard({ jobs, user, applications }) {
                     return (
                       <div key={application_index} className='mb-4 mt-20 flex justify-center'>
                   <div className='pl-16 pr-16 -mt-6 w-1/2'>
-                    <Link href={`/job/${application.job.id}`}>
-                      <a className='text-xl font-bold underline'>
+                    <Link href={`/job/${application.job.id}`} className='text-xl font-bold underline'>
+                     
                         {application.job.title}
-                      </a>
+                      
                     </Link>
                     <h2 className='text-base font-normal mt-3'>
                       {application.coverletter}

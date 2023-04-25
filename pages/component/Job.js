@@ -28,13 +28,13 @@ const Job = ({job, isDashboard}) => {
                     await fetch('/api/job', {
                         body: JSON.stringify({
                             id: job.id,
-                            task: 'unpublish',
+                            task: 'publish',
                         }),
                         headers:  {'Content-Type': 'application/json'},
                         method: 'PUT'
                     })
                     router.reload(window.location.pathname)
-                }}>  ❌ Published</span>
+                }}>  ❌ Unpublished</span>
             )}
             <div className="mt-4">
                 <p className="inline">Posted by </p>
