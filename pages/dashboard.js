@@ -2,10 +2,9 @@ import { getServerSession } from "next-auth"
 import { authOptions } from "./api/auth/[...nextauth]"
 import { getApplications, getJobsPosted, getUser } from "@/lib/data"
 import prisma from "@/lib/prisma"
-import Jobs from "./component/Jobs"
 import { useSession } from "next-auth/react"
 import Link from "next/link"
-import Job from "./job/[id]"
+import Job from "./component/Job"
 
 export default function Dashboard({ jobs, user, applications }) {
     const { data: session, status } = useSession()
@@ -31,6 +30,35 @@ export default function Dashboard({ jobs, user, applications }) {
                 {jobs.map((job, index) => (
                     <div key={index}>
                         <Job job={job} isDashboard={true}/>
+
+                        <div className="mb-4 mt-20">
+                            <div className="pl-16 pr-16 -mt-6">
+                              {job.applications.length === 0 ? (
+                                <p className="mb-10 text-2xl font-normal">
+                                  No Application so far 😞
+                                </p>
+                              ) : (
+                                <p className="mb-10 text-2xl font-normal">
+                                  {job.applications.length} applications
+                                </p>
+                              )}
+
+                              {job.applications?.map((application, application_index) => (
+                                <div key={index + '-' + application_index}>
+                                    <h2 className="mt-3">
+                                      <span className="font-bold mt-3 mr-3">
+                                        {application.author.name}
+                                      </span>
+                                      {application.author.email}
+                                    </h2>
+                                    <p className="text-lg mt-3 mb-1">
+                                      {application.coverletter}
+                                    </p>
+                                    <hr />
+                                </div>
+                              ))}
+                            </div>
+                        </div>
                     </div>
                 ))}
             </div>
