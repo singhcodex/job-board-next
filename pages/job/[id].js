@@ -22,6 +22,14 @@ export default function Job({job}){
                 </Link>
             </div>
         </div>
+
+        <div className="text-center mt-5">
+            <Link href={`/job/${job.id}/apply`}>
+                <button className="border px-8 py-2 mt-0 font-bold rounded-full hover:bg-black hover:text-white">
+                    Apply for this Job
+                </button>
+            </Link>
+        </div>
        </div>
        </>
     )
