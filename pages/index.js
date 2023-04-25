@@ -7,6 +7,7 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { getServerSession } from 'next-auth'
 import { authOptions } from './api/auth/[...nextauth]'
+import Link from 'next/link'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -37,7 +38,9 @@ export default function Index({jobs, user}) {
         </p>
         {user.company ? (
           <>
-          <button className='border px-8 py-2 mt-5 font-bold rounded-full bg-black text-white border-black '>Click here to post New Job</button>
+          <Link href={`/new`}>
+            <button className='border px-8 py-2 mt-5 font-bold rounded-full bg-black text-white border-black '>Click here to post New Job</button>
+          </Link>
           <button className='ml-5 border px-8 py-2 mt-5 font-bold rounded-full bg-black text-white border-black '>See all the Jobs you posted</button>
           </>
         ) : (
